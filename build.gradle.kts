@@ -8,6 +8,10 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.22"
 }
 
+allOpen {
+	annotation("jakarta.persistence.Entity")
+}
+
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
@@ -28,7 +32,13 @@ dependencies {
 	implementation("org.postgresql:postgresql:42.7.2")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude("org.junit.vintage', module: 'junit-vintage-engine")
+	}
+	/*testImplementation("org.testcontainers:postgresql:1.19.7")*/
+	testImplementation("com.h2database:h2:2.2.224")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+
 }
 
 tasks.withType<KotlinCompile> {
@@ -40,4 +50,5 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	jvmArgs = listOf("-Xshare:off", "-XX:+EnableDynamicAgentLoading")
 }
