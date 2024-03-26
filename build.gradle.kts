@@ -32,6 +32,7 @@ dependencies {
 	implementation("org.postgresql:postgresql:42.7.2")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude("org.junit.vintage', module: 'junit-vintage-engine")
 	}
@@ -39,6 +40,7 @@ dependencies {
 	testImplementation("com.h2database:h2:2.2.224")
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 
+	runtimeOnly("org.flywaydb:flyway-database-postgresql:10.10.0")
 }
 
 tasks.withType<KotlinCompile> {
